@@ -9,18 +9,18 @@ editor: visual
 #| echo: false
 ```
 
-## Load all the required libraries
+## Load the required libraries
 
 ```{r}
 library(sf)
 library(tidyverse)
 library(rosm)
 library(ggspatial)
-library(raster)
 library(leaflet)
 library(htmltools)
 library(rinat)
 library(rgbif)
+library(prettymapr)
 ```
 
 ## Read in the data
