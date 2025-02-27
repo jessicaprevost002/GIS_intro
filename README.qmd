@@ -1,6 +1,6 @@
 ---
 title: "Cedars GIS project"
-output: html
+output: rmarkdown::github_document
 editor: visual
 ---
 
