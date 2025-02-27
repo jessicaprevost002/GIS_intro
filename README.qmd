@@ -1,27 +1,91 @@
 ---
 title: "Cedars GIS project"
 format: html
-output: github
+output: README.md
 editor: visual
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-```{r}
-1 + 1
-```
-
-You can add options to executable code like this
-
 ```{r}
 #| echo: false
-2 * 2
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+
+## Load all the required libraries
+
+```{r}
+library(sf)
+library(tidyverse)
+library(rosm)
+library(ggspatial)
+library(raster)
+library(leaflet)
+library(htmltools)
+library(rinat)
+library(rgbif)
+```
+
+## Read in the data
+
+For each data source:
+
+1.  Read in the data
+
+-   Widdringtonia cedarbergensis data from 2013 Google Earth Satellite Imagery from Slingsby & Slingsby (2019)
+-   Field Widdringtonia cedarbergensis data from Slingsby & Slingsby (2019)
+-   Repeat photography data from White et al. (2016)
+
+2.  Check the CRS of the data
+3.  Convert data to spatial framework if required
+
+```{r}
+# read in cedar trees mapped from 2013 satellite imagery
+ced <- read_sf("data/All_Cedars_2_WGS84.kml")
+head(ced)
+class(ced)
+st_crs(ced)
+
+# read in cedar trees from Slingsby field survey 
+field_ced <- read_sf("data/fieldtrees.gpkg")
+st_crs(field_ced)
+
+# read in repear photography data
+photo_ced <- read_sf("data/data_raw_repeat_photography_White-2016.csv")
+photo_ced <- st_as_sf(photo_ced, coords = c("Longitude", "Latitude"), crs = st_crs(ced))
+st_crs(photo_ced)
+
+# read in inat data for clanwilliam cedars
+inat_ced <- get_inat_obs(taxon_name = "Widdringtonia cedarbergensis")
+
+inat_ced <- inat_ced %>% 
+  filter(positional_accuracy<46 & 
+           latitude<0 & # remove points which were entered incorrectly as negative
+           !is.na(latitude) &  # remove na values
+           !is.na(longitude) &
+           captive_cultivated == "false" & 
+           quality_grade == "research")
+
+inat_ced <- st_as_sf(inat_ced, coords = c("longitude", "latitude"), crs = 4326) # convert to spatial framework
+
+# read in gbif data for all clanwilliam cedars 
+gbif_ced <- (occ_data(scientificName = "Widdringtonia cedarbergensis",
+                      hasCoordinate=TRUE, 
+                      hasGeospatialIssue=FALSE))$data %>% 
+  filter(coordinateUncertaintyInMeters<50 & 
+           decimalLatitude<0 &
+           !is.na("decimalLatitude"))
+
+gbif_ced <- st_as_sf(gbif_ced, coords = c("decimalLongitude", "decimalLatitude"), crs = 4326)
+
+# read in gbif data for all Widdringtonia species 
+gbif_all <- (occ_data(scientificName = "Widdringtonia",
+                      hasCoordinate=TRUE, 
+                      hasGeospatialIssue=FALSE))$data %>% 
+  filter(coordinateUncertaintyInMeters<50 & 
+           decimalLatitude<0 &
+           !is.na("decimalLatitude"))
+
+gbif_all <- st_as_sf(gbif_all, coords = c("decimalLongitude", "decimalLatitude"), crs = 4326)
+unique(gbif_all$scientificName)
+
+```
+
