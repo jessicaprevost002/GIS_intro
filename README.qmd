@@ -1,6 +1,5 @@
 ---
 title: "Cedars GIS project"
-format: html
 output: README.md
 editor: visual
 ---
