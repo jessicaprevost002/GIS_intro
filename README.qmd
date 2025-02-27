@@ -1,8 +1,7 @@
 ---
 title: "Cedars GIS project"
-format: md
+output: html
 editor: visual
-prefer-html: true
 ---
 
 ```{r}
