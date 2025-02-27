@@ -1,6 +1,7 @@
 ---
 title: "Cedars GIS project"
-output: README.md
+output: 
+  md: "README.md"
 editor: visual
 ---
 
@@ -87,4 +88,61 @@ gbif_all <- st_as_sf(gbif_all, coords = c("decimalLongitude", "decimalLatitude")
 unique(gbif_all$scientificName)
 
 ```
+## Plot the data
 
+Create interactive maps of the Widdringtonia species data
+
+The first map shows the distribution of three Widdringtonia species, W. cedarbergensis, W. nodiflora and W. schwarzii, across Southern Africa with data from GBIF.
+
+```{r}
+leaflet() %>%
+  addTiles(group = "Default") %>%  
+  addCircleMarkers(data = subset(gbif_all, scientificName == "Widdringtonia cedarbergensis J.A.Marsh"),
+                   radius = 3, 
+                   color = "green",
+                   popup = ~paste("Scientific Name: ", scientificName, "<br>",
+                                  "Date of record: ", year)) %>% 
+  addCircleMarkers(data = subset(gbif_all, scientificName == "Widdringtonia nodiflora (L.) Powrie"),
+                   radius = 3, 
+                   color = "blue",
+                   popup = ~paste("Scientific Name: ", scientificName, "<br>",
+                                  "Date of record: ", year)) %>% 
+  addCircleMarkers(data = subset(gbif_all, scientificName == "Widdringtonia schwarzii (Marloth) Mast."),
+                   radius = 3, 
+                   color = "red",
+                   popup = ~paste("Scientific Name: ", scientificName, "<br>",
+                                  "Date of record: ", year)) %>%
+addLegend(position = "topright", 
+            colors = c("green", "blue", "red"), 
+            labels = c("Widdringtonia cedarbergensis", 
+                       "Widdringtonia nodiflora", 
+                       "Widdringtonia schwarzii"),
+            title = "Species Key")
+```
+Click on an observation to view the species and the date the record was imported into GBIF.
+
+The second map analyses the observations of W. cedarbergensis from iNaturalist and GBIF compared to the cedars mapped from the 2013 satellite imagery by Slingsby & Slingsby (2019).
+
+```{r}
+# interactive plot of satellite cedars, inat clanwilliam cedars and gbif clanwilliam cedars
+leaflet() %>%
+  # Add default OpenStreetMap map tiles
+  addTiles(group = "Default") %>%  
+  # Add points
+  addCircleMarkers(data = ced,
+                   radius = 3, 
+                   color = "green") %>%
+  addCircleMarkers(data = gbif_ced,
+                   radius = 3,
+                   color = "blue") %>%
+  addCircleMarkers(data = inat_ced,
+                   radius = 3,
+                   color = "red") %>%
+addLegend(position = "topright", 
+            colors = c("green", "blue", "red"), 
+            labels = c("Satellite observations", 
+                       "GBIF observations", 
+                       "iNaturalist observations"),
+            title = "Observation Key")
+
+```
