@@ -4,10 +4,6 @@ output: html
 editor: visual
 ---
 
-```{r}
-#| echo: false
-```
-
 ## Load the required libraries
 
 ```{r}
