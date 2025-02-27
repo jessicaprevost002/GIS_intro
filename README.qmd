@@ -1,6 +1,7 @@
 ---
 title: "Cedars GIS project"
-format: quarto::github_document
+format: html
+output: github
 editor: visual
 ---
 
