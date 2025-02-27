@@ -31,7 +31,9 @@ For each data source:
 2.  Check the CRS of the data
 3.  Convert data to spatial framework if required
 
-***Widdringtonia cedarbergensis*** **data from 2013 Google Earth Satellite Imagery from Slingsby & Slingsby (2019)**
+***Widdringtonia cedarbergensis*** **data from 2013 Google Earth Satellite Imagery (Slingsby & Slingsby, 2019)**
+
+Dataset license: CC BY 4.0
 
 ```{r}
 # read in data
@@ -42,7 +44,9 @@ class(sat_ced)
 st_crs(sat_ced)
 ```
 
-**Field *Widdringtonia cedarbergensis* data from Slingsby & Slingsby (2019)**
+**Field *Widdringtonia cedarbergensis* data (Slingsby & Slingsby, 2019)**
+
+Dataset license: CC BY 4.0
 
 ```{r}
 # read in data
@@ -50,7 +54,9 @@ field_ced <- read_sf("data/fieldtrees.gpkg")
 st_crs(field_ced)
 ```
 
-**Repeat photography *Widdringtonia cedarbergensis* data from White et al. (2016)**
+**Repeat photography *Widdringtonia cedarbergensis* data (White et al., 2016)**
+
+Dataset license: CC BY 3.0
 
 ```{r}
 # read in data
@@ -143,7 +149,7 @@ gbif_ced <- st_as_sf(gbif_ced, coords = c("decimalLongitude", "decimalLatitude")
 
 ## Plot interactive maps
 
-The first map we will plot shows the distribution of the four *Widdringtonia* species, *W. cedarbergensis, W. nodiflora,*, *W. schwarzii,* and *W. whytei,* across Southern Africa from iNaturalist data.
+The first map we will plot shows the distribution of the four *Widdringtonia* species, *W. cedarbergensis, W. nodiflora,*, *W. schwarzii,* and *W. whytei* across Southern Africa from iNaturalist data.
 
 ```{r, }
 #| fig-cap: "Interactive map of Widdringtonia species from iNaturalist"
@@ -276,4 +282,10 @@ Click on an observation to view whether the tree observed was an in-field survey
 
 # References
 
+Slingsby, J.A. & Slingsby, P.W.O. 2019. Global distribution of Clanwilliam cedar tree localities in 2013. figshare \[dataset\] https://doi.org/10.6084/m9.figshare.7670435.v1
 
+Slingsby, J.A. & Slingsby, P.W.O. 2019. Monitoring the critically endangered Clanwilliam cedar with freely available Google Earth imagery. PeerJ. https://doi.org/10.7717/peerj.7005
+
+White, J.D.M., Jack, S., Hoffman, M.T., Puttick, J., Bonora, D., Visser, V., February, E. 2016. Collapse of an iconic conifer: long-term changes in the demography of Widdringtonia cedarbergensis using repeat photography. BMC Ecology, 16(1), 11 https://doi.org/10.1186/s12898-016-0108-6
+
+White, J.D.M., Jack, S., Puttick, J., Bonora, D., Visser, V., February, E. 2016. Mortality and climatic/environmental correlates of Widdringtonia cedargensis trees in the Cederberg, South Africa. PANGAEA \[dataset\] https://doi.org/10.1594/PANGAEA.866937
