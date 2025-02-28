@@ -166,7 +166,7 @@ leaflet() %>%
                    radius = 3,
                    color = "blue",
                    popup = ~paste("Date of record: ", eventDate)) %>%
-  addCircleMarkers(data = subset(inat, scientific_name == "Widdringtonia cedarbergensis"),
+  addCircleMarkers(data = subset(inat),
                    radius = 3,
                    color = "cyan",
                    popup = ~paste("Date of record: ", datetime)) %>%
@@ -195,8 +195,8 @@ The third map plots the in-field observations of *W. cedarbergensis* from Slings
 
 # plot interactive map using leaflet
 leaflet() %>%
-  # Add default OpenStreetMap map tiles
-  addTiles(group = "Default") %>%  
+  # Add 2023 google earth satellite imagery
+  addTiles(urlTemplate = "https://aerial.openstreetmap.org.za/layer/ngi-aerial/{z}/{x}/{y}.jpg") %>%  
   # Add points
   addCircleMarkers(data = sat_ced,
                    radius = 3, 
