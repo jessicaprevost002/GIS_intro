@@ -166,7 +166,7 @@ leaflet() %>%
                    radius = 3,
                    color = "blue",
                    popup = ~paste("Date of record: ", eventDate)) %>%
-  addCircleMarkers(data = inat_ced,
+  addCircleMarkers(data = subset(inat, scientific_name == "Widdringtonia cedarbergensis"),
                    radius = 3,
                    color = "cyan",
                    popup = ~paste("Date of record: ", datetime)) %>%
