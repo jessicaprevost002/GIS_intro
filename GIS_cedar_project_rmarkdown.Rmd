@@ -123,28 +123,26 @@ leaflet() %>%
                    color = "cyan",
                    popup = ~paste("Scientific Name: ", scientific_name, "<br>",
                                   "Date of record: ", datetime)) %>%
-  addCircleMarkers(data = subset(inat, scientific_name == "Widdringtonia whyteii"),
-                   radius = 3, 
-                   color = "darkblue",
-                   popup = ~paste("Scientific Name: ", scientific_name, "<br>",
-                                  "Date of record: ", datetime)) %>%
   # add a legend to the plot
   addLegend(position = "topright", 
-            colors = c("green", "blue", "cyan", "darkblue"), 
+            colors = c("green", "blue", "cyan"), 
             labels = c("Widdringtonia cedarbergensis",
                        "Widdringtonia nodiflora", 
-                       "Widdringtonia schwarzii",
-                       "Widdringtonia whytei"),
+                       "Widdringtonia schwarzii"),
             title = "Species Key")
+
 ```
 
 > **Tip:**
 Click on an observation to view the species and the date the tree was observed.
 
-This map can be used to interrogate the distribution of the four *Widdringtonia* species, a genus native to Southern Africa. The map shows that *W. cedarbergensis* is confined to the Cederberg mountains in South Africa, *W. schwarzii* is confined to the Baviaanskloof and Kouga mountain ranges in the Eastern Cape, while *W. whytei* is endemic to Malawi. *Widdringtonia nodiflora* has a more widespread distribution across Southern Africa from the Western Cape to Malawi. The distribution of the four *Widdringtonia* species raises interesting questions about the evolution of the genus.
+This map can be used to interrogate the distribution of three of the four *Widdringtonia* species, a genus native to Southern Africa. The map shows that *W. cedarbergensis* is confined to the Cederberg mountains in South Africa, *W. schwarzii* is confined to the Baviaanskloof and Kouga mountain ranges in the Eastern Cape, while *Widdringtonia nodiflora* has a more widespread distribution across Southern Africa from the Western Cape to Malawi. *Widdringtonia whytei* is endemic to Malawi and isolated on the Mulanje Massif. The distribution of the four *Widdringtonia* species raises interesting questions about the evolution of the genus.
 
 > **Note:**
 Observations of *W. schwarzii* occur in Kirstenbosch National Botanical Garden, outside of their natural range, indicating these individuals have not been filtered out from the iNaturalist dataset.
+
+> **Note:**
+Observations of *W. whyteii* could not be plotted since the locations have been obscured from iNaturalist as this species is also critically endangered. 
 
 The second map analyses the observations of *W. cedarbergensis* from iNaturalist and GBIF compared to the cedars mapped from the 2013 satellite imagery by Slingsby & Slingsby (2019).
 
